@@ -26,7 +26,7 @@
               ignoreDeprecatedCodeUnits="true"
               disableCodeCoverageIgnore="false">
         <report>
-            <!-- <clover outputFile="tests/coverage/clover/report.xml"/> -->
+            <clover outputFile="tests/coverage/clover/report.xml" />
             <!-- <cobertura outputFile="tests/coverage/cobertura/report.xml"/> -->
             <!-- <crap4j outputFile="tests/coverage/crap4j/report.xml" threshold="50"/> -->
             <html outputDirectory="tests/coverage/html" lowUpperBound="75" highLowerBound="95"/>
