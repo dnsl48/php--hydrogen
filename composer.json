@@ -17,7 +17,7 @@
     ],
     "minimum-stability": "stable",
     "scripts": {
-        "test": "phpunit"
+        "test": "XDEBUG_MODE=coverage phpunit"
     },
     "require": {
         "symfony/serializer": "^7.0"

@@ -11,7 +11,7 @@
          failOnWarning="true">
     <testsuites>
         <testsuite name="default">
-            <directory>tests</directory>
+            <directory>tests/src</directory>
         </testsuite>
     </testsuites>
 
@@ -20,4 +20,19 @@
             <directory>src</directory>
         </include>
     </source>
+
+    <coverage includeUncoveredFiles="true"
+              pathCoverage="true"
+              ignoreDeprecatedCodeUnits="true"
+              disableCodeCoverageIgnore="false">
+        <report>
+            <!-- <clover outputFile="tests/coverage/clover/report.xml"/> -->
+            <!-- <cobertura outputFile="tests/coverage/cobertura/report.xml"/> -->
+            <!-- <crap4j outputFile="tests/coverage/crap4j/report.xml" threshold="50"/> -->
+            <html outputDirectory="tests/coverage/html" lowUpperBound="75" highLowerBound="95"/>
+            <!-- <php outputFile="tests/coverage/coverage/report.php"/> -->
+            <!-- <text outputFile="tests/coverage/txt/report.txt" showUncoveredFiles="false" showOnlySummary="true"/> -->
+            <!-- <xml outputDirectory="tests/coverage/xml"/> -->
+        </report>
+    </coverage>
 </phpunit>

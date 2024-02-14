@@ -1,3 +1,4 @@
-tests/.phpunit.cache
 composer.lock
+tests/.phpunit.cache
+tests/coverage/
 vendor

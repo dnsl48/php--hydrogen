@@ -1,15 +1,17 @@
 <?php declare(strict_types = 1);
 
-namespace Hydrogen\Tests\Unit\Exception;
+namespace Hydrogen\Tests\Exception;
 
 use Exception;
+use Hydrogen\Exception\DataIntegrityException;
 use Hydrogen\Exception\DataSanitisationException;
+use Hydrogen\Exception\HydrogenException;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(DataSanitisationException::class)]
-#[UsesClass(Exception::class)]
+#[CoversClass(DataIntegrityException::class)]
+#[CoversClass(HydrogenException::class)]
 final class DataSanitisationExceptionTest extends TestCase
 {
     public function testConstruct(): void
