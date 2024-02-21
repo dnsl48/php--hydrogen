@@ -1,0 +1,20 @@
+parameters:
+  tmpDir: .cache/phpstan
+  level: 9
+  paths:
+    - src
+    - tests/src
+  checkTooWideReturnTypesInProtectedAndPublicMethods: true
+  checkUninitializedProperties: true
+  checkImplicitMixed: true
+  checkBenevolentUnionTypes: true
+  checkMissingOverrideMethodAttribute: true
+  checkMissingCallableSignature: true
+  exceptions:
+    implicitThrows: false
+    reportUncheckedExceptionDeadCatch: true
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
+  rememberPossiblyImpureFunctionValues: false
+  treatPhpDocTypesAsCertain: false

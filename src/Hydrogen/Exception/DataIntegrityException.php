@@ -10,11 +10,19 @@ use Throwable;
  * That may be due to data validation or sanitisation (see derived exceptions).
  *
  * Contains references to the original data causing the troubles.
+ *
+ * @template T
+ *
+ * @api
  */
 abstract class DataIntegrityException extends HydrogenException
 {
     public function __construct(
-        /** The bad value causing the issue */
+        /**
+         * The bad value causing the issue
+         * 
+         * @var T $badValue
+         */
         private mixed $badValue,
         Stringable|string $message,
         Throwable $previous = null
@@ -23,6 +31,9 @@ abstract class DataIntegrityException extends HydrogenException
         parent::__construct($message, $previous);
     }
 
+    /**
+     * @return T
+     */
     public function getBadValue(): mixed
     {
         return $this->badValue;

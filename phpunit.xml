@@ -2,7 +2,7 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.0/phpunit.xsd"
          bootstrap="vendor/autoload.php"
-         cacheDirectory="tests/.phpunit.cache"
+         cacheDirectory=".cache/phpunit"
          executionOrder="depends,defects"
          requireCoverageMetadata="true"
          beStrictAboutCoverageMetadata="true"
@@ -26,13 +26,13 @@
               ignoreDeprecatedCodeUnits="true"
               disableCodeCoverageIgnore="false">
         <report>
-            <clover outputFile="tests/coverage/clover/report.xml" />
-            <!-- <cobertura outputFile="tests/coverage/cobertura/report.xml"/> -->
-            <!-- <crap4j outputFile="tests/coverage/crap4j/report.xml" threshold="50"/> -->
-            <html outputDirectory="tests/coverage/html" lowUpperBound="75" highLowerBound="95"/>
-            <!-- <php outputFile="tests/coverage/coverage/report.php"/> -->
-            <!-- <text outputFile="tests/coverage/txt/report.txt" showUncoveredFiles="false" showOnlySummary="true"/> -->
-            <!-- <xml outputDirectory="tests/coverage/xml"/> -->
+            <clover outputFile="coverage/clover/report.xml" />
+            <!-- <cobertura outputFile="coverage/cobertura/report.xml"/> -->
+            <!-- <crap4j outputFile="coverage/crap4j/report.xml" threshold="50"/> -->
+            <html outputDirectory="coverage/html" lowUpperBound="75" highLowerBound="95"/>
+            <!-- <php outputFile="coverage/coverage/report.php"/> -->
+            <!-- <text outputFile="coverage/txt/report.txt" showUncoveredFiles="false" showOnlySummary="true"/> -->
+            <!-- <xml outputDirectory="coverage/xml"/> -->
         </report>
     </coverage>
 </phpunit>

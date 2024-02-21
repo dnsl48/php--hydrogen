@@ -2,11 +2,16 @@
 
 namespace Hydrogen;
 
+use JsonSerializable;
+use Stringable;
+
 /**
  * Datum represents a single valid unit of Data.
  *
  * This interface is a contract enforcing validation on initialisation (in the constructor).
+ *
+ * @api
  */
-interface Datum
+interface Datum extends Stringable, JsonSerializable
 {
 }
