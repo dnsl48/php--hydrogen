@@ -1,0 +1,50 @@
+{
+    "name": "dnsl48/hydrogen-factorio",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Hydrogen\\": "src/Hydrogen/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Serge Latyntsev",
+            "email": "dnsl48@gmail.com"
+        }
+    ],
+    "scripts": {
+        "test": "XDEBUG_MODE=coverage phpunit",
+        "debug": "XDEBUG_MODE=debug,develop XDEBUG_SESSION=1 phpunit --no-coverage",
+        "phpstan": "phpstan"
+    },
+    "require": {
+        "php": "^8.3",
+        "dnsl48/hydrogen-core": "dev-main"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.1",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan-strict-rules": "^1.5",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpstan/phpstan-deprecation-rules": "^1.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../hydrogen-core"
+        }
+    ]
+}

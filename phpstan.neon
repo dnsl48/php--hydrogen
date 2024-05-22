@@ -1,0 +1,24 @@
+parameters:
+  tmpDir: .cache/phpstan
+  level: 9
+  paths:
+    - packages/hydrogen-core/src
+    - packages/hydrogen-core/tests/src
+    - packages/hydrogen-factorio/src
+    - packages/hydrogen-factorio/tests/src
+    - packages/hydrogen-vocab-native/src
+    - packages/hydrogen-vocab-native/tests/src
+  checkTooWideReturnTypesInProtectedAndPublicMethods: true
+  checkUninitializedProperties: true
+  checkImplicitMixed: true
+  checkBenevolentUnionTypes: true
+  checkMissingOverrideMethodAttribute: true
+  checkMissingCallableSignature: true
+  exceptions:
+    implicitThrows: false
+    reportUncheckedExceptionDeadCatch: true
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
+  rememberPossiblyImpureFunctionValues: false
+  treatPhpDocTypesAsCertain: false

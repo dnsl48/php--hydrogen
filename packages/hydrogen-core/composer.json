@@ -1,0 +1,34 @@
+{
+    "name": "dnsl48/hydrogen-core",
+    "description": "Declarative data definition framework for PHP (Schemas, DTOs, Atomic types, Native Objects)",
+    "type": "library",
+    "homepage": "https://github.com/dnsl48/php--hydrogen-core",
+    "license": "MIT/Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "Hydrogen\\": "src/Hydrogen/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Serge Latyntsev",
+            "email": "dnsl48@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "scripts": {
+        "test": "XDEBUG_MODE=coverage phpunit",
+        "debug": "XDEBUG_MODE=debug,develop XDEBUG_SESSION=1 phpunit --no-coverage"
+    },
+    "require": {
+        "php": "^8.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    }
+}

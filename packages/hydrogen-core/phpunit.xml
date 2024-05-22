@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.1/phpunit.xsd" bootstrap="vendor/autoload.php" cacheDirectory=".cache/phpunit" executionOrder="depends,defects" requireCoverageMetadata="true" beStrictAboutCoverageMetadata="true" beStrictAboutOutputDuringTests="true" failOnRisky="true" failOnWarning="true" displayDetailsOnTestsThatTriggerWarnings="true">
+  <testsuites>
+    <testsuite name="default">
+      <directory>tests/src</directory>
+    </testsuite>
+  </testsuites>
+  <source restrictNotices="true" restrictWarnings="true" ignoreIndirectDeprecations="true">
+    <include>
+      <directory>src</directory>
+    </include>
+  </source>
+  <coverage includeUncoveredFiles="true" pathCoverage="true" ignoreDeprecatedCodeUnits="true" disableCodeCoverageIgnore="false">
+    <report>
+      <clover outputFile="coverage/clover/report.xml"/>
+      <!-- <cobertura outputFile="coverage/cobertura/report.xml"/> -->
+      <!-- <crap4j outputFile="coverage/crap4j/report.xml" threshold="50"/> -->
+      <html outputDirectory="coverage/html" lowUpperBound="75" highLowerBound="95"/>
+      <!-- <php outputFile="coverage/coverage/report.php"/> -->
+      <!-- <text outputFile="coverage/txt/report.txt" showUncoveredFiles="false" showOnlySummary="true"/> -->
+      <!-- <xml outputDirectory="coverage/xml"/> -->
+    </report>
+  </coverage>
+</phpunit>
