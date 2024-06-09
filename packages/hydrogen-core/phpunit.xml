@@ -10,7 +10,7 @@
       <directory>src</directory>
     </include>
   </source>
-  <coverage includeUncoveredFiles="true" pathCoverage="true" ignoreDeprecatedCodeUnits="true" disableCodeCoverageIgnore="false">
+  <coverage pathCoverage="true" ignoreDeprecatedCodeUnits="true">
     <report>
       <clover outputFile="coverage/clover/report.xml"/>
       <!-- <cobertura outputFile="coverage/cobertura/report.xml"/> -->
