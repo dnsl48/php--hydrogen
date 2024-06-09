@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Decimal\NativeFloat\Contract\Mission;
 
@@ -29,7 +31,10 @@ class NativeFloatSanitiser implements ValueContainerSanitiser
         if ($valueContainer instanceof NativeFloatSanitisedValue) {
             return $valueContainer;
         } elseif (!$valueContainer instanceof NativeFloatCastedValue) {
-            throw new DataSanitisationException($valueContainer, sprintf('NativeFloat expected, %s given', get_debug_type($valueContainer)));
+            throw new DataSanitisationException(
+                $valueContainer,
+                sprintf('NativeFloat expected, %s given', get_debug_type($valueContainer))
+            );
         } else {
             return new NativeFloatSanitisedValue($valueContainer->getValue());
         }

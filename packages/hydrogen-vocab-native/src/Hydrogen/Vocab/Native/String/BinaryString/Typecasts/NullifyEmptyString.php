@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Typecasts;
 
@@ -8,9 +10,9 @@ use Override;
 /**
  * @phpstan-implements Typecast<string, ?string>
  */
-class NullifyEmptyString implements Typecast
+readonly class NullifyEmptyString implements Typecast
 {
-    public function __construct(public readonly bool $trim = true)
+    public function __construct(public bool $trim = true)
     {
     }
 

@@ -1,13 +1,12 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Hydrogen\Hydration\DataSource;
 
 use Hydrogen\Exception\DataHydrationException;
-use Hydrogen\Exception\HydrogenException;
 use Hydrogen\Hydration\DataSource;
 use Override;
-use ReflectionException;
 use ReflectionProperty;
 
 /**
@@ -19,13 +18,14 @@ class PlainDataSource implements DataSource
     /**
      * List of the data sources
      *
-     * @var mixed[]
+     * @var array
+     * @phpstan-var array<int, mixed>
      */
-    private array $sources = [];
+    private array $sources;
 
     public function __construct(mixed ...$sources)
     {
-        $this->sources = $sources;
+        $this->sources = iterator_to_array($sources, false);
     }
 
     // #[Override]
@@ -55,9 +55,9 @@ class PlainDataSource implements DataSource
     public function containsInstanceOf(string $fqcn): bool
     {
         foreach ($this->sources as $source) {
-            if (is_object($source) && is_a($source, $fqcn, false)) {
+            if (is_object($source) && is_a($source, $fqcn)) {
                 return true;
-            } else if (($source instanceof DataSource) && $source->containsInstanceOf($fqcn)) {
+            } elseif (($source instanceof DataSource) && $source->containsInstanceOf($fqcn)) {
                 return true;
             }
         }
@@ -75,9 +75,9 @@ class PlainDataSource implements DataSource
         $fqcn = $property->getDeclaringClass()->getName();
 
         foreach ($this->sources as $source) {
-            if (is_object($source) && is_a($source, $fqcn, false)) {
+            if (is_object($source) && is_a($source, $fqcn)) {
                 return $property->getValue($source);
-            } else if ($source instanceof DataSource) {
+            } elseif ($source instanceof DataSource) {
                 if ($source->containsInstanceOf($fqcn)) {
                     return $source->fetchPropertyValue($property);
                 }
@@ -99,7 +99,7 @@ class PlainDataSource implements DataSource
             } elseif (($source instanceof DataSource) && $source->hasValueForName($name)) {
                 return true;
             } elseif (is_object($source) && property_exists($source, $name)) {
-                if (null !== $source->{$name}) { // @phpstan-ignore-line
+                if (null !== $source->{$name}) {  // @phpstan-ignore-line
                     return true;
                 }
             }

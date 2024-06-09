@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Contract;
 
@@ -8,7 +10,8 @@ namespace Hydrogen\Contract;
  *
  * @api
  */
-interface Transformer {
+interface Transformer
+{
     /**
      * @phpstan-param T $value Initial value prior to the transformation
      * @phpstan-return R Resulting value after the transformation applied

@@ -1,10 +1,17 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen;
 
 use Hydrogen\Exception\HydrogenException;
 use Traversable;
 
+/**
+ * Represents a data Structure
+ *
+ * @api
+ */
 interface Struct extends Datum
 {
     /**

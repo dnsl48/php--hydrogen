@@ -1,13 +1,14 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Fixture\Native\Struct;
+declare(strict_types=1);
 
-class NativeStruct
+namespace Hydrogen\Tests\Fixture\Native\Struct;
+
+readonly class NativeStructC
 {
     public function __construct(
-        public readonly float $float = 0,
-        public readonly ?float $nullableFloat = null
-    )
-    {
+        public float $float = 0,
+        public ?float $nullableFloat = null
+    ) {
     }
 }

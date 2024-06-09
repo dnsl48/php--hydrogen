@@ -1,15 +1,16 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Fixture\Native\Struct;
+declare(strict_types=1);
 
-use Tests\Fixture\Native\Enum\NativeEnumA;
+namespace Hydrogen\Tests\Fixture\Native\Struct;
 
-class NativeStructE
+use Hydrogen\Tests\Fixture\Native\Enum\NativeEnumA;
+
+readonly class NativeStructE
 {
     public function __construct(
-        public readonly NativeEnumA $basicEnumA = NativeEnumA::VariantA,
-        public readonly ?NativeEnumA $nullableBasicEnumA = null
-    )
-    {
+        public NativeEnumA $basicEnumA = NativeEnumA::VariantA,
+        public ?NativeEnumA $nullableBasicEnumA = null
+    ) {
     }
 }

@@ -1,8 +1,9 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Fixture\Value\NaiveValueObject;
+declare(strict_types=1);
 
-use Hydrogen\Contract\Patch;
+namespace Hydrogen\Tests\Fixture\Value\NaiveValueObject;
+
 use Hydrogen\Contract\Transformer;
 use Hydrogen\Value\Contract\Container\ValueContainer;
 use Override;
@@ -10,9 +11,9 @@ use Override;
 /**
  * @phpstan-implements ValueContainer<mixed>
  */
-class NaiveValueContainer implements ValueContainer
+readonly class NaiveValueContainer implements ValueContainer
 {
-    public function __construct(public readonly mixed $value)
+    public function __construct(public mixed $value)
     {
     }
 
@@ -23,7 +24,8 @@ class NaiveValueContainer implements ValueContainer
     }
 
     #[Override]
-    public function getValue(): mixed {
+    public function getValue(): mixed
+    {
         return $this->value;
     }
 }

@@ -1,8 +1,10 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Generics;
+
 use Hydrogen\Contract\Transformer;
-use Hydrogen\Value\Contract\Container\ValueContainer;
 use Override;
 
 /**
@@ -16,7 +18,8 @@ abstract class AbstractValueContainer implements ValueContainerInterface
     public function __construct(
         /** @phpstan-var T */
         private readonly mixed $value
-    ) {}
+    ) {
+    }
 
     /**
      * @phpstan-return T

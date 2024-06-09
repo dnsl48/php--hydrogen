@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Tests\Hydrogen\Struct\Hydration\DataSource;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Hydrogen\Struct\Hydration\DataSource;
 
 use Hydrogen\Exception\DataHydrationException;
 use Hydrogen\Exception\DataIntegrityException;
@@ -12,11 +14,11 @@ use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
-use Tests\Fixture\DataSources\MockDataSourceA;
-use Tests\Fixture\DataSources\MockDataSourceB;
-use Tests\Fixture\Native\Struct\NativeStructA;
-use Tests\Fixture\Native\Struct\NativeStructAB;
-use Tests\Fixture\Native\Struct\NativeStructB;
+use Hydrogen\Tests\Fixture\DataSources\MockDataSourceA;
+use Hydrogen\Tests\Fixture\DataSources\MockDataSourceB;
+use Hydrogen\Tests\Fixture\Native\Struct\NativeStructA;
+use Hydrogen\Tests\Fixture\Native\Struct\NativeStructAB;
+use Hydrogen\Tests\Fixture\Native\Struct\NativeStructB;
 
 #[CoversClass(PlainDataSource::class)]
 #[UsesClass(DataHydrationException::class)]
@@ -102,10 +104,9 @@ class PlainDataSourceTest extends TestCase
                         'key 7' => 'value B'
                     ],
                 ),
-                new NativeStructAB(nullableInteger: 6, nullableBoolean: true),
+                new NativeStructAB(nullableBoolean: true, nullableInteger: 6),
             ),
-            new class extends stdClass
-            {
+            new class () extends stdClass {
                 public string $key_2 = 'value 2';
                 public string $key_3 = 'value 3';
             }
@@ -121,8 +122,8 @@ class PlainDataSourceTest extends TestCase
     }
 
     /**
-     * @throws DataHydrationException 
-     * @throws ExpectationFailedException 
+     * @throws DataHydrationException
+     * @throws ExpectationFailedException
      */
     public function testPropertyValueA(): void
     {
@@ -137,8 +138,8 @@ class PlainDataSourceTest extends TestCase
     }
 
     /**
-     * @throws DataHydrationException 
-     * @throws ExpectationFailedException 
+     * @throws DataHydrationException
+     * @throws ExpectationFailedException
      */
     public function testPropertyValueB(): void
     {
@@ -149,32 +150,38 @@ class PlainDataSourceTest extends TestCase
     }
 
     /**
-     * @throws ExpectationFailedException 
-     * @throws DataHydrationException 
+     * @throws ExpectationFailedException
+     * @throws DataHydrationException
      */
     public function testPropertyValueC(): void
     {
         $source = $this->getSource();
 
         static::assertTrue($source->containsInstanceOf(NativeStructAB::class));
-        static::assertEquals(6, $source->fetchPropertyValue(new ReflectionProperty(NativeStructAB::class, 'nullableInteger')));
+        static::assertEquals(
+            6,
+            $source->fetchPropertyValue(new ReflectionProperty(NativeStructAB::class, 'nullableInteger'))
+        );
     }
 
     /**
-     * @throws ExpectationFailedException 
-     * @throws DataHydrationException 
+     * @throws ExpectationFailedException
+     * @throws DataHydrationException
      */
     public function testPropertyValueD(): void
     {
         $source = $this->getSource();
 
         static::assertTrue($source->containsInstanceOf(NativeStructAB::class));
-        static::assertEquals(6, $source->fetchPropertyValue(new ReflectionProperty(NativeStructAB::class, 'nullableInteger')));
+        static::assertEquals(
+            6,
+            $source->fetchPropertyValue(new ReflectionProperty(NativeStructAB::class, 'nullableInteger'))
+        );
     }
 
     /**
-     * @return void 
-     * @throws ExpectationFailedException 
+     * @return void
+     * @throws ExpectationFailedException
      */
     public function testHasValueForName(): void
     {
@@ -194,9 +201,9 @@ class PlainDataSourceTest extends TestCase
     }
 
     /**
-     * @return void 
-     * @throws DataHydrationException 
-     * @throws ExpectationFailedException 
+     * @return void
+     * @throws DataHydrationException
+     * @throws ExpectationFailedException
      */
     public function testFetchValueForName(): void
     {

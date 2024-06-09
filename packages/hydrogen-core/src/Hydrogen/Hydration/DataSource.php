@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Hydration;
 
@@ -44,7 +46,7 @@ interface DataSource
      * @param string $name Name of the value to check
      *
      * @return mixed value for the given name
-     * 
+     *
      * @phpstan-throws DataHydrationException<array{self, string}>
      * @throws DataHydrationException
      */

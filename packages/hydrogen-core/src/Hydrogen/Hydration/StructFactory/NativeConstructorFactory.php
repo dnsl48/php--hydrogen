@@ -1,15 +1,15 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Hydration\StructFactory;
 
 use Hydrogen\Attribute\Nullify;
 use Hydrogen\Attribute\Nullify\Stage;
 use Hydrogen\Attribute\PreTypecast;
-use Hydrogen\Attribute\TypeHint;
 use Hydrogen\Exception\DataHydrationException;
 use Hydrogen\Exception\HydrogenException;
 use Hydrogen\Exception\LogicException;
-use Hydrogen\Hydration\DataFactory\GenericNativeDataFactoryProvider;
 use Hydrogen\Hydration\DataSource;
 use Hydrogen\Hydration\DatumFactory;
 use Hydrogen\Reflection\AttributeFinder;
@@ -34,7 +34,7 @@ use Stringable;
  * @phpstan-template T of object
  * @phpstan-implements DatumFactory<T>
  */
-class NativeConstructorFactory implements DatumFactory
+readonly class NativeConstructorFactory implements DatumFactory
 {
     /**
      * @throws LogicException If the target class does not have an appropriate constructor
@@ -43,8 +43,7 @@ class NativeConstructorFactory implements DatumFactory
         /** @phpstan-var ReflectionClass<T> */
         private ReflectionClass $targetClass,
         private DataSource $dataSource
-    )
-    {
+    ) {
         if (!static::validateConstructor($targetClass)) {
             throw new LogicException(sprintf('Incompatible constructor \'%s\'', $targetClass->getName()));
         }
@@ -71,7 +70,8 @@ class NativeConstructorFactory implements DatumFactory
      * @throws HydrogenException
      */
     #[Override]
-    public function instantiate(): object {
+    public function instantiate(): object
+    {
         $arguments = [];
         $constructor = $this->targetClass->getConstructor();
 
@@ -91,8 +91,12 @@ class NativeConstructorFactory implements DatumFactory
                 $hasType = $parameter->hasType();
                 $nativeType = $parameter->getType();
 
-                $parameter_pretypecasts = $parameter->getAttributes(PreTypecast::class, ReflectionAttribute::IS_INSTANCEOF);
+                $parameter_pretypecasts = $parameter->getAttributes(
+                    PreTypecast::class,
+                    ReflectionAttribute::IS_INSTANCEOF
+                );
 
+                /** @var Nullify<mixed>[] $parameter_nullifyers */
                 $parameter_nullifyers = array_map(
                     static function (ReflectionAttribute $attr): Nullify {
                         return $attr->newInstance();
@@ -112,7 +116,8 @@ class NativeConstructorFactory implements DatumFactory
                     throw new DataHydrationException(
                         null,
                         sprintf(
-                            'Parameter \'%s::__construct(..., (%d) $%s ,...)\' is mandatory, but the data source is missing a value',
+                            'Parameter \'%s::__construct(..., (%d) $%s ,...)\' is mandatory, ' .
+                            'but the data source is missing a value',
                             $this->targetClass->getName(),
                             $position,
                             $name
@@ -124,22 +129,22 @@ class NativeConstructorFactory implements DatumFactory
 
                 foreach ($parameter_nullifyers as $nullifyer) {
                     if (($nullifyer->nullifyStage->value & Stage::PreTypecast->value) != 0) {
-                        if ($nullifyer->typecast->is_null($argument_value)) {
+                        if ($nullifyer->typecast->isNull($argument_value)) {
                             $argument_value = null;
                         }
                     }
                 }
 
                 foreach ($parameter_pretypecasts as $pretypecast) {
-                    $ptci = $pretypecast->newInstance();
-                    assert($ptci instanceof PreTypecast);
+                    $preTypecastInstance = $pretypecast->newInstance();
+                    assert($preTypecastInstance instanceof PreTypecast);
 
-                    $argument_value = call_user_func($ptci->transformer, $argument_value);
+                    $argument_value = call_user_func($preTypecastInstance->transformer, $argument_value);
                 }
 
                 foreach ($parameter_nullifyers as $nullifyer) {
                     if (($nullifyer->nullifyStage->value & Stage::PreConstruct->value) != 0) {
-                        if ($nullifyer->typecast->is_null($argument_value)) {
+                        if ($nullifyer->typecast->isNull($argument_value)) {
                             $argument_value = null;
                         }
                     }
@@ -223,21 +228,25 @@ class NativeConstructorFactory implements DatumFactory
                                     case NativeTypesEnum::OBJECT:
                                     case NativeTypesEnum::RESOURCE:
                                     case NativeTypesEnum::CLOSED_RESOURCE:
+                                    case NativeTypesEnum::UNKNOWN:
                                         continue 2;
                                 }
                             } else {
-                                /** @phpstan-var class-string */
+                                /** @phpstan-var class-string $type_name */
                                 $type_name = $type->getName();
                                 $type_reflection = new ReflectionClass($type_name);
 
-                                $type_nullifyers = (new AttributeFinder($type_name, Nullify::class))->getAttributeInstances();
+                                /** @phpstan-var AttributeFinder<T, Nullify<mixed>> $attribute_finder */
+                                $attribute_finder = new AttributeFinder($type_name, Nullify::class);
+
+                                /** @phpstan-var Nullify<mixed>[] $type_nullifyers */
+                                $type_nullifyers = $attribute_finder->getAttributeInstances();
 
                                 if (is_object($argument_value) && $type_reflection->isInstance($argument_value)) {
-
                                     if ($optional) {
                                         foreach ($type_nullifyers as $nullifyer) {
                                             if (($nullifyer->nullifyStage->value & Stage::PostConstruct->value) != 0) {
-                                                if ($nullifyer->typecast->is_null($argument_value)) {
+                                                if ($nullifyer->typecast->isNull($argument_value)) {
                                                     $argument_value = null;
                                                 }
                                             }
@@ -249,7 +258,7 @@ class NativeConstructorFactory implements DatumFactory
                                 } elseif ($optional) {
                                     foreach ($type_nullifyers as $nullifyer) {
                                         if (($nullifyer->nullifyStage->value & Stage::PreConstruct->value) != 0) {
-                                            if ($nullifyer->typecast->is_null($argument_value)) {
+                                            if ($nullifyer->typecast->isNull($argument_value)) {
                                                 $argument_value = null;
                                             }
                                         }
@@ -266,7 +275,7 @@ class NativeConstructorFactory implements DatumFactory
 
                                     foreach ($parameter_nullifyers as $nullifyer) {
                                         if (($nullifyer->nullifyStage->value & Stage::PostConstruct->value) != 0) {
-                                            if ($nullifyer->typecast->is_null($argument_value)) {
+                                            if ($nullifyer->typecast->isNull($argument_value)) {
                                                 $argument_value = null;
                                             }
                                         }

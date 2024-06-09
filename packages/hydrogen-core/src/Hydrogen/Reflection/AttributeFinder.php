@@ -1,43 +1,48 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Reflection;
 
+use Generator;
 use ReflectionAttribute;
 use ReflectionClass;
+use ReflectionException;
 
 /**
  * @phpstan-template TSource of object
  * @phpstan-template TAttribute of object
  */
-class AttributeFinder
+readonly class AttributeFinder
 {
     public function __construct(
-        /** @phpstan-var class-string<TSource> */
-        public readonly string $classname,
-
-        /** @phpstan-var class-string<TAttribute> */
-        public readonly string $attribute
-    )
-    {
+        /** @phpstan-var class-string<TSource> $classname */
+        public string $classname,
+        /** @phpstan-var class-string<TAttribute> $attribute */
+        public string $attribute
+    ) {
     }
 
     /**
-     * @phpstan-return \Generator<ReflectionAttribute<TAttribute>>
+     * @phpstan-return Generator<ReflectionAttribute<TAttribute>>
      */
     public function getAttributeReflections(): iterable
     {
-        $ref = new ReflectionClass($this->classname);
+        try {
+            $ref = new ReflectionClass($this->classname);
+        } catch (ReflectionException) {  // @phpstan-ignore-line
+            return [];
+        }
 
         do {
             foreach ($ref->getAttributes($this->attribute, ReflectionAttribute::IS_INSTANCEOF) as $attribute) {
-
                 yield $attribute;
             }
         } while ($ref = $ref->getParentClass());
     }
 
     /**
-     * @phpstan-return \Generator<TAttribute>
+     * @phpstan-return Generator<TAttribute>
      */
     public function getAttributeInstances(): iterable
     {

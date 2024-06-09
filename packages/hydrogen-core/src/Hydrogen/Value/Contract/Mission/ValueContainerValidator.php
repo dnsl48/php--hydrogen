@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Value\Contract\Mission;
 
@@ -9,7 +11,7 @@ use Hydrogen\Value\Contract\Container\ValidatedValueContainer;
 /**
  * @phpstan-template TSanitised
  * @phpstan-template TValidated
- * 
+ *
  * @api
  */
 interface ValueContainerValidator

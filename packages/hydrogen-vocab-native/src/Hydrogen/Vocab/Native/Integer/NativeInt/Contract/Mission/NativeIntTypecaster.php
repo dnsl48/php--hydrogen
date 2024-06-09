@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Integer\NativeInt\Contract\Mission;
 
@@ -22,6 +24,7 @@ class NativeIntTypecaster implements ValueContainerTypecaster
      * @phpstan-param ValueContainer<T> $valueContainer
      *
      * @phpstan-assert NativeIntValueContainer<T> $valueContainer
+     * @throws DataTypecastException
      */
     #[Override]
     public function __invoke(ValueContainer $valueContainer): NativeIntCastedValue
@@ -47,7 +50,7 @@ class NativeIntTypecaster implements ValueContainerTypecaster
         } else {
             throw new DataTypecastException(
                 $valueContainer->getValue(),
-                "Could not cast to int the value of type ".get_debug_type($value)
+                "Could not cast to int the value of type " . get_debug_type($value)
             );
         }
 

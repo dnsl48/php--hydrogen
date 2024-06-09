@@ -1,9 +1,10 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Value\Trait;
 
 use Hydrogen\Exception\LogicException;
-use Hydrogen\Value\AbstractValue;
 use JsonSerializable;
 use Override;
 
@@ -20,7 +21,7 @@ trait GenericStringableFallback
     {
         $value = json_encode($this->jsonSerialize());
         if (false === $value) {
-            throw new LogicException('Could not stringify the jsonified data');
+            throw new LogicException('Could not stringify the JSON data');
         } else {
             return $value;
         }

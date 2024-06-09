@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Decimal\NativeFloat\Trait;
 
@@ -21,7 +23,7 @@ trait NativeFloatValidate
     #[Override]
     protected function validate(SanitisedValueContainer $valueContainer): NativeFloatValidatedValue
     {
-        
+
         static $nativeFloatValidator = new NativeFloatValidator();
         assert($nativeFloatValidator instanceof NativeFloatValidator);
         return $nativeFloatValidator($valueContainer);

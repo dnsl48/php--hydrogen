@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Trait;
 
@@ -13,14 +15,12 @@ trait BinaryStringContainerise
      * @phpstan-return BinaryStringValueContainer<mixed>
      *
      * @phpstan-throws DataContainerException<mixed>
-     *
-     * @throws DataContainerException
      */
     #[Override]
     protected function containerise(mixed $value): BinaryStringValueContainer
     {
-        /** @phpstan-var BinaryStringContaineriser */
         static $binaryStringContaineriser = new BinaryStringContaineriser();
+        assert($binaryStringContaineriser instanceof BinaryStringContaineriser);
         return $binaryStringContaineriser($value);
     }
 }

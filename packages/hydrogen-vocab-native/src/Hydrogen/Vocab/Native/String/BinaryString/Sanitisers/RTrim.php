@@ -1,6 +1,9 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Sanitisers;
+
 use Override;
 
 class RTrim extends Trim

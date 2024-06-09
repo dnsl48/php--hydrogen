@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Trait;
 
@@ -18,8 +20,8 @@ trait BinaryStringValidate
     #[Override]
     protected function validate(SanitisedValueContainer $valueContainer): BinaryStringValidatedValue
     {
-        /** @phpstan-var BinaryStringValidator */
         static $binaryStringValidator = new BinaryStringValidator();
+        assert($binaryStringValidator instanceof BinaryStringValidator);
         return $binaryStringValidator($valueContainer);
     }
 }

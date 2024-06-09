@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Contract\Mission;
 
@@ -15,23 +17,26 @@ use Override;
 class BinaryStringSanitiser implements ValueContainerSanitiser
 {
     /**
-     * @phpstan-param TypecastedValueContainer<string> $value
+     * @phpstan-param TypecastedValueContainer<string> $valueContainer
      *
-     * @phpstan-assert BinaryStringCastedValue $value
+     * @phpstan-assert BinaryStringCastedValue $valueContainer
      *
      * @phpstan-throws DataSanitisationException<string>
      *
      * @throws DataSanitisationException
      */
     #[Override]
-    public function __invoke(TypecastedValueContainer $value): BinaryStringSanitisedValue
+    public function __invoke(TypecastedValueContainer $valueContainer): BinaryStringSanitisedValue
     {
-        if ($value instanceof BinaryStringSanitisedValue) {
-            return $value;
-        } elseif (!$value instanceof BinaryStringCastedValue) {
-            throw new DataSanitisationException($value, sprintf('BinaryString expected, %s given', get_debug_type($value)));
+        if ($valueContainer instanceof BinaryStringSanitisedValue) {
+            return $valueContainer;
+        } elseif (!$valueContainer instanceof BinaryStringCastedValue) {
+            throw new DataSanitisationException(
+                $valueContainer,
+                sprintf('BinaryString expected, %s given', get_debug_type($valueContainer))
+            );
         } else {
-            return new BinaryStringSanitisedValue($value->getValue());
+            return new BinaryStringSanitisedValue($valueContainer->getValue());
         }
     }
 }

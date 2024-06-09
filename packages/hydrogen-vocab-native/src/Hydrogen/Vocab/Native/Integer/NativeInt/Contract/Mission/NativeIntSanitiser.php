@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Integer\NativeInt\Contract\Mission;
 
@@ -29,7 +31,10 @@ class NativeIntSanitiser implements ValueContainerSanitiser
         if ($valueContainer instanceof NativeIntSanitisedValue) {
             return $valueContainer;
         } elseif (!$valueContainer instanceof NativeIntCastedValue) {
-            throw new DataSanitisationException($valueContainer, sprintf('NativeInt expected, %s given', get_debug_type($valueContainer)));
+            throw new DataSanitisationException(
+                $valueContainer,
+                sprintf('NativeInt expected, %s given', get_debug_type($valueContainer))
+            );
         } else {
             return new NativeIntSanitisedValue($valueContainer->getValue());
         }

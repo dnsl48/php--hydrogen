@@ -1,6 +1,8 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Hydrogen\Exception;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Hydrogen\Exception;
 
 use Exception;
 use Hydrogen\Exception\DataIntegrityException;
@@ -17,8 +19,8 @@ use Random\RandomException;
 final class DataValidationExceptionTest extends TestCase
 {
     /**
-     * @throws RandomException 
-     * @throws ExpectationFailedException 
+     * @throws RandomException
+     * @throws ExpectationFailedException
      */
     public function testConstruct(): void
     {

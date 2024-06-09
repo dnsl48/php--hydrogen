@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Boolean\NativeBoolean\Trait;
 
@@ -13,8 +15,6 @@ trait NativeBooleanContainerise
      * @phpstan-return NativeBooleanValueContainer<mixed>
      *
      * @phpstan-throws DataContainerException<mixed>
-     *
-     * @throws DataContainerException
      */
     #[Override]
     protected function containerise(mixed $value): NativeBooleanValueContainer

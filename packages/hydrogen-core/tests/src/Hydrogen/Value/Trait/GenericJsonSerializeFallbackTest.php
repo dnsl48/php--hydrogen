@@ -1,12 +1,13 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Tests\Hydrogen\Value\Trait;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Hydrogen\Value\Trait;
 
 use Hydrogen\Exception\HydrogenException;
 use Hydrogen\Exception\LogicException;
 use Hydrogen\Reflection\AttributeFinder;
 use Hydrogen\Value\AbstractValue;
-
 use Hydrogen\Value\Trait\GenericJsonSerializeFallback;
 use JsonSerializable;
 use Override;
@@ -14,26 +15,9 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Stringable;
-use Tests\Fixture\Value\NaiveValueObject\NaiveValueContracts;
-
-enum _EnumClean
-{
-    case A;
-    case B;
-}
-
-enum _EnumBackedStr: string
-{
-    case A = 'A';
-    case B = 'B';
-}
-
-enum _EnumBackedInt: int
-{
-    case A = 0;
-    case B = 1;
-}
+use Hydrogen\Tests\Fixture\Value\NaiveValueObject\NaiveValueContracts;
 
 #[CoversClass(GenericJsonSerializeFallback::class)]
 #[UsesClass(AbstractValue::class)]
@@ -42,13 +26,10 @@ enum _EnumBackedInt: int
 #[UsesClass(LogicException::class)]
 class GenericJsonSerializeFallbackTest extends TestCase
 {
-    /**
-     * @throws LogicException 
-     */
+    /** @phpstan-throws LogicException */
     private function mock(mixed $value): mixed
     {
-        return (new class($value) extends AbstractValue
-        {
+        return (new class ($value) extends AbstractValue {
             use GenericJsonSerializeFallback;
             use NaiveValueContracts;
 
@@ -61,8 +42,8 @@ class GenericJsonSerializeFallbackTest extends TestCase
     }
 
     /**
-     * @throws LogicException 
-     * @throws ExpectationFailedException 
+     * @phpstan-throws LogicException
+     * @throws ExpectationFailedException
      */
     public function testFallback(): void
     {
@@ -85,8 +66,7 @@ class GenericJsonSerializeFallbackTest extends TestCase
         static::assertEquals(1.2, $this->mock(1.2));
         static::assertEquals(INF, $this->mock(INF));
 
-        static::assertEquals(['a' => 'b'], $this->mock(new class() implements JsonSerializable
-        {
+        static::assertEquals(['a' => 'b'], $this->mock(new class () implements JsonSerializable {
             #[Override]
             public function jsonSerialize(): mixed
             {
@@ -94,8 +74,7 @@ class GenericJsonSerializeFallbackTest extends TestCase
             }
         }));
 
-        static::assertEquals('toast', $this->mock(new class() implements Stringable
-        {
+        static::assertEquals('toast', $this->mock(new class () implements Stringable {
             #[Override]
             public function __toString(): string
             {
@@ -103,20 +82,21 @@ class GenericJsonSerializeFallbackTest extends TestCase
             }
         }));
 
-        static::assertEquals('A', $this->mock(_EnumBackedStr::A));
-        static::assertEquals(1, $this->mock(_EnumBackedInt::B));
+        static::assertEquals('A', $this->mock(EnumBackedStr::A));
+        static::assertEquals(1, $this->mock(EnumBackedInt::B));
 
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('Unserializable type: Tests\Hydrogen\Value\Trait\_EnumClean');
-        static::assertEquals('A', $this->mock(_EnumClean::A));
+        $this->expectExceptionMessage('Unserializable type: Hydrogen\Tests\Hydrogen\Value\Trait\EnumClean');
+        static::assertEquals('A', $this->mock(EnumClean::A));
     }
 
     public function testFailedSerialization(): void
     {
         try {
-            $a = new \stdClass;
+            $a = new stdClass();
             $a->a = $a;
             $this->mock($a);
+            throw new LogicException('Unreachable');
         } catch (LogicException $e) {
             static::assertEquals('Unserializable type: stdClass', $e->getMessage());
         }

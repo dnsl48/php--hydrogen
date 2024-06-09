@@ -1,8 +1,9 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Value\Contract\Container;
 
-use Hydrogen\Contract\Patch;
 use Hydrogen\Contract\Transformer;
 
 /**

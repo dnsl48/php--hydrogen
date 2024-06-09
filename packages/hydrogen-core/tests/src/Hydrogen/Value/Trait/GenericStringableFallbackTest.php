@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Tests\Hydrogen\Value\Trait;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Hydrogen\Value\Trait;
 
 use Hydrogen\Exception\HydrogenException;
 use Hydrogen\Exception\LogicException;
@@ -12,7 +14,8 @@ use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
-use Tests\Fixture\Value\NaiveValueObject\NaiveValueContracts;
+use Hydrogen\Tests\Fixture\Value\NaiveValueObject\NaiveValueContracts;
+use stdClass;
 
 #[CoversClass(GenericStringableFallback::class)]
 #[UsesClass(AbstractValue::class)]
@@ -23,8 +26,7 @@ class GenericStringableFallbackTest extends TestCase
 {
     private function mock(mixed $value): Value
     {
-        return new class($value) extends AbstractValue
-        {
+        return new class ($value) extends AbstractValue {
             use GenericStringableFallback;
             use NaiveValueContracts;
 
@@ -36,17 +38,16 @@ class GenericStringableFallbackTest extends TestCase
         };
     }
 
-    private function badMock(mixed $value): Value
+    private function badMock(): Value
     {
-        return new class($value) extends AbstractValue
-        {
+        return new class (null) extends AbstractValue {
             use GenericStringableFallback;
             use NaiveValueContracts;
 
             #[Override]
             public function jsonSerialize(): mixed
             {
-                $a = new \stdClass;
+                $a = new stdClass();
                 $a->a = $a;
 
                 return $a;
@@ -64,6 +65,6 @@ class GenericStringableFallbackTest extends TestCase
     public function testFailedJson(): void
     {
         $this->expectException(LogicException::class);
-        static::assertEquals('toast', $this->badMock(null));
+        static::assertEquals('toast', $this->badMock());
     }
 }

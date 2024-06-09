@@ -1,9 +1,10 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Attribute\Nullify;
 
-
-enum Stage : int
+enum Stage: int
 {
     case PreTypecast = 1;
     case PreConstruct = 2;

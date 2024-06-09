@@ -1,6 +1,8 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Fixture\Native\Enum;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Fixture\Native\Enum;
 
 enum NativeEnumA
 {

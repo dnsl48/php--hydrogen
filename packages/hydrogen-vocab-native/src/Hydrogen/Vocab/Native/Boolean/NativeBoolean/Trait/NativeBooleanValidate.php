@@ -1,13 +1,16 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Boolean\NativeBoolean\Trait;
+
 use Hydrogen\Exception\DataValidationException;
 use Hydrogen\Value\Contract\Container\SanitisedValueContainer;
+use Hydrogen\Vocab\Native\Boolean\NativeBoolean\Contract\Container\NativeBooleanSanitisedValue;
 use Hydrogen\Vocab\Native\Boolean\NativeBoolean\Contract\Container\NativeBooleanValidatedValue;
 use Hydrogen\Vocab\Native\Boolean\NativeBoolean\Contract\Mission\NativeBooleanValidator;
 use Override;
 
-// class NativeBooleanValidate extends
 trait NativeBooleanValidate
 {
     /**

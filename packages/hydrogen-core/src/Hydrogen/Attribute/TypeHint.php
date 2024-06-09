@@ -1,13 +1,15 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Attribute;
 
 use Attribute;
 
 #[Attribute(Attribute::TARGET_PARAMETER | Attribute::TARGET_PROPERTY)]
-class TypeHint
+readonly class TypeHint
 {
-    public function __construct(public readonly string $typeValue)
+    public function __construct(public string $typeValue)
     {
     }
 }

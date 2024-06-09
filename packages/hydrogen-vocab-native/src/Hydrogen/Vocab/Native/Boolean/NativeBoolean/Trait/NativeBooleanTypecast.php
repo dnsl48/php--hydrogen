@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Boolean\NativeBoolean\Trait;
 
@@ -13,7 +15,7 @@ trait NativeBooleanTypecast
 {
     /**
      * @phpstan-param ValueContainer<mixed> $valueContainer
-     * 
+     *
      * @phpstan-assert NativeBooleanValueContainer<mixed> $valueContainer
      *
      * @throws DataTypecastException

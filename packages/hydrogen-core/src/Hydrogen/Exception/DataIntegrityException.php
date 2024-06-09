@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Exception;
 
@@ -20,14 +22,13 @@ abstract class DataIntegrityException extends HydrogenException
     public function __construct(
         /**
          * The bad value causing the issue
-         * 
+         *
          * @phpstan-var T $badValue
          */
-        private mixed $badValue,
+        private readonly mixed $badValue,
         Stringable|string $message,
         Throwable $previous = null
-    )
-    {
+    ) {
         parent::__construct($message, $previous);
     }
 

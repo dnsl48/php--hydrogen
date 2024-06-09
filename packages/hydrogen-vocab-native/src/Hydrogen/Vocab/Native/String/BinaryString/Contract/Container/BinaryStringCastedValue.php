@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Contract\Container;
 
@@ -28,7 +30,8 @@ class BinaryStringCastedValue extends BinaryStringValueContainer implements Type
     }
 
     #[Override]
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->getValue();
     }
 }

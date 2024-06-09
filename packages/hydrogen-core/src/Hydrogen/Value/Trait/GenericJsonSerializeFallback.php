@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Value\Trait;
 
@@ -24,14 +26,14 @@ trait GenericJsonSerializeFallback
         $value = $this->getValue();
 
         if (null === $value) {
+            return null;
+        } elseif (is_scalar($value)) {
             return $value;
-        } else if (is_scalar($value)) {
-            return $value;
-        } else if ($value instanceof JsonSerializable) {
+        } elseif ($value instanceof JsonSerializable) {
             return $value->jsonSerialize();
-        } else if ($value instanceof Stringable) {
+        } elseif ($value instanceof Stringable) {
             return (string) $value;
-        } else if ($value instanceof BackedEnum) {
+        } elseif ($value instanceof BackedEnum) {
             return $value->value;
         } else {
             throw new LogicException(sprintf('Unserializable type: %s', get_debug_type($value)));

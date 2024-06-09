@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Contract;
 
@@ -12,9 +14,4 @@ namespace Hydrogen\Contract;
  */
 interface Promoter extends Transformer
 {
-    // /**
-    //  * @phpstan-param T $value
-    //  * @phpstan-return R
-    //  */
-    // public function __invoke(mixed $value): mixed;
 }

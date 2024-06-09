@@ -21,7 +21,7 @@ class NativeConstructorFactoryProvider extends DatumFactoryProvider
      */
     public function __construct(
         /** @phpstan-var ReflectionClass<T> */
-        private ReflectionClass $targetClass
+        private readonly ReflectionClass $targetClass
     ) {
         if (!static::validateConstructor($targetClass)) {
             throw new LogicException(sprintf('Incompatible constructor \'%s\'', $targetClass->getName()));
@@ -40,7 +40,7 @@ class NativeConstructorFactoryProvider extends DatumFactoryProvider
     }
 
     /**
-     * @phpstan-param ReflectionClass<T> $targetClass 
+     * @phpstan-param ReflectionClass<T> $targetClass
      */
     public static function validateConstructor(ReflectionClass $targetClass): bool
     {

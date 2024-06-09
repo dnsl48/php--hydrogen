@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Contract\Mission;
 
@@ -20,7 +22,10 @@ class BinaryStringValidator implements ValueContainerValidator
         if ($valueContainer instanceof BinaryStringValidatedValue) {
             return $valueContainer;
         } elseif (!$valueContainer instanceof BinaryStringSanitisedValue) {
-            throw new DataValidationException($valueContainer, "Expected a sanitised BinaryString, given ".get_debug_type($valueContainer));
+            throw new DataValidationException(
+                $valueContainer,
+                "Expected a sanitised BinaryString, given " . get_debug_type($valueContainer)
+            );
         } else {
             return new BinaryStringValidatedValue($valueContainer->getValue());
         }

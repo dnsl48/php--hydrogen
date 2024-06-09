@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Decimal\NativeFloat\Trait;
 
@@ -13,8 +15,6 @@ trait NativeFloatContainerise
      * @phpstan-return NativeFloatValueContainer<mixed>
      *
      * @phpstan-throws DataContainerException<mixed>
-     *
-     * @throws DataContainerException
      */
     #[Override]
     protected function containerise(mixed $value): NativeFloatValueContainer

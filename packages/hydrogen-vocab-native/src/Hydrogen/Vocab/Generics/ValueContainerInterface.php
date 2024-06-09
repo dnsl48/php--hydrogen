@@ -1,6 +1,9 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Generics;
+
 use Hydrogen\Value\Contract\Container\ValueContainer;
 
 /**
@@ -11,7 +14,7 @@ use Hydrogen\Value\Contract\Container\ValueContainer;
 interface ValueContainerInterface extends ValueContainer
 {
     public function __construct(
-        /** @phpstan-var T */
+        /** @phpstan-param T $value */
         mixed $value
     );
 }

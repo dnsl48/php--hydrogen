@@ -1,10 +1,11 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Value;
 
 use Hydrogen\Attribute\PreSanitise;
 use Hydrogen\Attribute\PreTypecast;
-use Hydrogen\Contract\Patch;
 use Hydrogen\Contract\Transformer;
 use Hydrogen\Exception\DataContainerException;
 use Hydrogen\Exception\DataSanitisationException;
@@ -97,7 +98,7 @@ abstract class AbstractValue implements Value, TypecastAwareConstructor, ValueCo
     abstract protected function containerise($value): ValueContainer;
 
     /**
-     * @phpstan-param ValueContainer<TInputValue> $value 
+     * @phpstan-param ValueContainer<TInputValue> $value
      * @phpstan-return ValueContainer<TPreCastedInputValue>
      */
     protected function preTypecast(ValueContainer $value): ValueContainer
@@ -124,16 +125,17 @@ abstract class AbstractValue implements Value, TypecastAwareConstructor, ValueCo
      *
      * @phpstan-param ValueContainer<TPreCastedInputValue> $value Initial value
      *
-     * @phpstan-return TypecastedValueContainer<TCastedValue> Casted value to be sanitised and validated
+     * @phpstan-return TypecastedValueContainer<TCastedValue> Type-casted value to be sanitised and validated
      *
      * @phpstan-throws DataTypecastException<TInputValue>
-     * @throws DataSanitisationException
+     *
+     * @throws DataTypecastException
      */
     abstract protected function typecast(ValueContainer $value): TypecastedValueContainer;
 
     /**
-     * 
-     * @phpstan-param TypecastedValueContainer<TCastedValue> $value 
+     *
+     * @phpstan-param TypecastedValueContainer<TCastedValue> $value
      * @phpstan-return TypecastedValueContainer<TCastedValue>
      */
     protected function preSanitise(TypecastedValueContainer $value): TypecastedValueContainer
@@ -145,7 +147,7 @@ abstract class AbstractValue implements Value, TypecastAwareConstructor, ValueCo
         /** @TODO: add static guarantees that AttributeFinder only returns relevant PreSanitisers for the correct TCastedValue */
         $attrFinder = new AttributeFinder(static::class, PreSanitise::class);
 
-        /** @var PreSanitise<TCastedValue> */
+        /** @var PreSanitise<TCastedValue> $preSanitise */
         foreach ($attrFinder->getAttributeInstances() as $preSanitise) {
             assert($preSanitise instanceof PreSanitise);
 
@@ -159,9 +161,9 @@ abstract class AbstractValue implements Value, TypecastAwareConstructor, ValueCo
      * Sanitise the value before validation.
      * Should be used to clean up the data from unnecessary, redundant or dangerous parts.
      *
-     * @phpstan-param TypecastedValueContainer<TCastedValue> $value Typecasted value
+     * @phpstan-param TypecastedValueContainer<TCastedValue> $value Type-casted value
      *
-     * @phpstan-return SanitisedValueContainer<TSanitizedValue> Sanitised/Casted value to be validated
+     * @phpstan-return SanitisedValueContainer<TSanitizedValue> Sanitised/Type-casted value to be validated
      *
      * @phpstan-throws DataSanitisationException<TCastedValue>
      * @throws DataSanitisationException

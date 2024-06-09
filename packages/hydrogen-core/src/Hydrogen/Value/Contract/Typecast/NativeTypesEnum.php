@@ -1,8 +1,10 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Value\Contract\Typecast;
 
-enum NativeTypesEnum : string
+enum NativeTypesEnum: string
 {
     case BOOLEAN = 'boolean';
     case INTEGER = 'integer';

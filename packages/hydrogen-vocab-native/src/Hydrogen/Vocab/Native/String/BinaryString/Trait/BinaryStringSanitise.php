@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Trait;
 
@@ -13,12 +15,13 @@ trait BinaryStringSanitise
     /**
      * @phpstan-throws DataSanitisationException<string>
      *
-     * @throws DataSanitisationException 
+     * @throws DataSanitisationException
      */
     #[Override]
-    protected function sanitise(TypecastedValueContainer $valueContainer): BinaryStringSanitisedValue {
-        /** @phpstan-var BinaryStringSanitiser */
+    protected function sanitise(TypecastedValueContainer $valueContainer): BinaryStringSanitisedValue
+    {
         static $binaryStringSanitiser = new BinaryStringSanitiser();
+        assert($binaryStringSanitiser instanceof BinaryStringSanitiser);
         return $binaryStringSanitiser($valueContainer);
     }
 }

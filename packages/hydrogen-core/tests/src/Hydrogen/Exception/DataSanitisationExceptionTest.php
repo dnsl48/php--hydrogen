@@ -1,6 +1,8 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Hydrogen\Exception;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Hydrogen\Exception;
 
 use Exception;
 use Hydrogen\Exception\DataIntegrityException;
@@ -18,7 +20,7 @@ final class DataSanitisationExceptionTest extends TestCase
 {
     /**
      * @throws RandomException
-     * @throws ExpectationFailedException 
+     * @throws ExpectationFailedException
      */
     public function testConstruct(): void
     {

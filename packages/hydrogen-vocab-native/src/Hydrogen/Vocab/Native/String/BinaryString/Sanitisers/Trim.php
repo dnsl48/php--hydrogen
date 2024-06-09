@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Sanitisers;
 
@@ -15,8 +17,7 @@ class Trim implements Sanitiser
         public readonly string $characters = " \n\r\t\v\x00",
         public readonly ?string $extra_characters = null,
         public readonly bool $stringify = true
-    )
-    {
+    ) {
     }
 
     #[Override]
@@ -26,7 +27,7 @@ class Trim implements Sanitiser
             return $value;
         }
 
-        if (is_object($value) && $value instanceof Stringable) {
+        if ($value instanceof Stringable) {
             $value = (string) $value;
         } elseif (!is_scalar($value)) {
             return $value;

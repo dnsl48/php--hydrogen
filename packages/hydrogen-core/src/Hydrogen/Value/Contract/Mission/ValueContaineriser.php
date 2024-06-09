@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Value\Contract\Mission;
 
@@ -13,7 +15,7 @@ use Hydrogen\Value\Contract\Container\ValueContainer;
 interface ValueContaineriser
 {
     /**
-     * @phpstan-param T $value 
+     * @phpstan-param T $value
      *
      * @phpstan-return ValueContainer<T>
      *

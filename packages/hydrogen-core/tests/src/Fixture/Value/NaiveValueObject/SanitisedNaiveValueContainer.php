@@ -1,6 +1,8 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Fixture\Value\NaiveValueObject;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Fixture\Value\NaiveValueObject;
 
 use Hydrogen\Value\Contract\Container\SanitisedValueContainer;
 
@@ -9,6 +11,6 @@ use Hydrogen\Value\Contract\Container\SanitisedValueContainer;
  * @phpstan-extends TypecastedNaiveValueContainer<T>
  * @phpstan-implements SanitisedValueContainer<T>
  */
-class SanitisedNaiveValueContainer extends TypecastedNaiveValueContainer implements SanitisedValueContainer
+readonly class SanitisedNaiveValueContainer extends TypecastedNaiveValueContainer implements SanitisedValueContainer
 {
 }

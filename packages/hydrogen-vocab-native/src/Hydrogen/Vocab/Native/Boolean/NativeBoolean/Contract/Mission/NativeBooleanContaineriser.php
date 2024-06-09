@@ -1,6 +1,9 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Boolean\NativeBoolean\Contract\Mission;
+
 use Hydrogen\Value\Contract\Mission\ValueContaineriser;
 use Hydrogen\Vocab\Native\Boolean\NativeBoolean\Contract\Container\NativeBooleanValueContainer;
 use Override;

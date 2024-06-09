@@ -1,6 +1,8 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Fixture\DataSources;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Fixture\DataSources;
 
 class MockDataSourceB extends MockDataSourceA
 {

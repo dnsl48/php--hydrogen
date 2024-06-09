@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Integer\NativeInt\Contract\Mission;
 
@@ -21,7 +23,7 @@ class NativeIntValidator implements ValueContainerValidator
      *
      * @phpstan-assert NativeIntSanitisedValue $valueContainer
      *
-     * @throws DataValidationException 
+     * @throws DataValidationException
      */
     #[Override]
     public function __invoke(SanitisedValueContainer $valueContainer): NativeIntValidatedValue
@@ -29,7 +31,10 @@ class NativeIntValidator implements ValueContainerValidator
         if ($valueContainer instanceof NativeIntValidatedValue) {
             return $valueContainer;
         } elseif (!$valueContainer instanceof NativeIntSanitisedValue) {
-            throw new DataValidationException($valueContainer, "Expected a sanitised NativeInt, given ".get_debug_type($valueContainer));
+            throw new DataValidationException(
+                $valueContainer,
+                "Expected a sanitised NativeInt, given " . get_debug_type($valueContainer)
+            );
         } else {
             return new NativeIntValidatedValue($valueContainer->getValue());
         }

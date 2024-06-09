@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\Decimal\NativeFloat\Contract\Mission;
 
@@ -21,7 +23,7 @@ class NativeFloatValidator implements ValueContainerValidator
      *
      * @phpstan-assert NativeFloatSanitisedValue $valueContainer
      *
-     * @throws DataValidationException 
+     * @throws DataValidationException
      */
     #[Override]
     public function __invoke(SanitisedValueContainer $valueContainer): NativeFloatValidatedValue
@@ -29,7 +31,10 @@ class NativeFloatValidator implements ValueContainerValidator
         if ($valueContainer instanceof NativeFloatValidatedValue) {
             return $valueContainer;
         } elseif (!$valueContainer instanceof NativeFloatSanitisedValue) {
-            throw new DataValidationException($valueContainer, "Expected a sanitised NativeFloat, given ".get_debug_type($valueContainer));
+            throw new DataValidationException(
+                $valueContainer,
+                "Expected a sanitised NativeFloat, given " . get_debug_type($valueContainer)
+            );
         } else {
             return new NativeFloatValidatedValue($valueContainer->getValue());
         }

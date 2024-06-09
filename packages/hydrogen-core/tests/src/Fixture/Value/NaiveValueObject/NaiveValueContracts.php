@@ -1,6 +1,8 @@
-<?php declare(strict_types = 1);
+<?php
 
-namespace Tests\Fixture\Value\NaiveValueObject;
+declare(strict_types=1);
+
+namespace Hydrogen\Tests\Fixture\Value\NaiveValueObject;
 
 use Hydrogen\Value\Contract\Container\SanitisedValueContainer;
 use Hydrogen\Value\Contract\Container\TypecastedValueContainer;
@@ -20,21 +22,23 @@ trait NaiveValueContracts
         } else {
             return new NaiveValueContainer($value);
         }
-        
     }
 
     #[Override]
-    protected function typecast(ValueContainer $value): TypecastedValueContainer {
+    protected function typecast(ValueContainer $value): TypecastedValueContainer
+    {
         return new TypecastedNaiveValueContainer($value->getValue());
     }
 
     #[Override]
-    protected function sanitise(TypecastedValueContainer $value): SanitisedValueContainer {
+    protected function sanitise(TypecastedValueContainer $value): SanitisedValueContainer
+    {
         return new SanitisedNaiveValueContainer($value->getValue());
     }
 
     #[Override]
-    protected function validate(SanitisedValueContainer $value): ValidatedValueContainer {
+    protected function validate(SanitisedValueContainer $value): ValidatedValueContainer
+    {
         return new ValidatedNaiveValueContainer($value->getValue());
     }
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hydrogen\Vocab\Native\String\BinaryString\Trait;
 
@@ -11,15 +13,13 @@ use Override;
 trait BinaryStringTypecast
 {
     /**
-     * @phpstan-throws DataTypecastException<mixed>
-     *
      * @throws DataTypecastException
      */
     #[Override]
     protected function typecast(ValueContainer $valueContainer): BinaryStringCastedValue
     {
-        /** @phpstan-var BinaryStringTypecaster */
         static $binaryStringTypecaster = new BinaryStringTypecaster();
+        assert($binaryStringTypecaster instanceof BinaryStringTypecaster);
         return $binaryStringTypecaster($valueContainer);
     }
 }
