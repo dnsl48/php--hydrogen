@@ -1,6 +1,6 @@
 {
     "name": "dnsl48/hydrogen",
-    "description": "Declarative data definition framework for PHP (Schemas, DTOs, Atomic types, Native Objects)",
+    "description": "Declarative data definition framework for PHP (Schemas, DTOs, Atomic types, Native Objects etc)",
     "type": "metapackage",
     "license": "MIT/Apache-2.0",
     "authors": [
